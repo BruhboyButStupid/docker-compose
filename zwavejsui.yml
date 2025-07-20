@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  zwave-js-ui:
+    container_name: zwave-js-ui
+    image: ghcr.io/zwave-js/zwave-js-ui:latest
+    restart: unless-stopped
+    ports:
+      - "8091:8091" # Z-Wave JS UI web interface
+      - "3000:3000" # Z-Wave JS WebSocket server
+    devices:
+      - /dev/serial/by-id/usb-0658_0200-if00:/dev/zwave # Replace with your Z-Wave controller's path
+    volumes:
+      - ./config:/usr/src/app/store # Persistent storage for configuration and data
+    environment:
+      - ZWAVEJS_EXTERNAL_CONFIG=/usr/src/app/store/config.json
+      - ZWAVEJS_UI_PORT=8091
+      - ZWAVEJS_SERVER_PORT=3000
+      - TZ=America/New_York # Set your timezone
