@@ -8,7 +8,7 @@ services:
       - "8091:8091" # Z-Wave JS UI web interface
       - "3000:3000" # Z-Wave JS WebSocket server
     devices:
-      - /dev/serial/by-id/usb-0658_0200-if00:/dev/zwave # Replace with your Z-Wave controller's path
+      - /dev/ttyACM0:/dev/zwave # Replace with your Z-Wave controller's path
     volumes:
       - ./config:/usr/src/app/store # Persistent storage for configuration and data
     environment:
